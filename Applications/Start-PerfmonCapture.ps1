@@ -210,7 +210,7 @@ $DCSTemplate = @"
 "@
 
 $DCSName = 'PerfMonExample'
-$DCSCheck = logman query $DCSName # Query if DCS already exists
+$DCSCheck = & logman query $DCSName # Query if DCS already exists
 
 if ($DCSCheck[1] -like "*$($DCSName)") {
     Write-Output 'DCS found!'
@@ -218,7 +218,7 @@ if ($DCSCheck[1] -like "*$($DCSName)") {
 		Write-Output 'Trace running, exiting...'
 	} else {
 		Write-Output 'Trace not running, starting...'
-		$DCS.Start($false)
+		& logman start $DCSName
 	}
 } else {
     Write-Output 'DCS not found, creating...'
