@@ -1,16 +1,16 @@
 <#
 .DESCRIPTION
-    This script starts a Perfmon trace using the provided Genesys Cloud .XML
+    This script starts a Perfmon trace using the provided .XML
 .INPUTS
 	DataCollectorSet stored in XML
 .OUTPUTS
-    Perfmon files are saved to C:\perflogs\admin\Genesys Cloud
+    Perfmon files are saved to C:\Windows\Temp
 .NOTES
     Version:        0.1
     Author:         Daniel Ratliff
     Creation Date:  Thursday, April 11th 2024, 2:43:19 pm
     File: Start-PerfMonCapture.ps1
-    Copyright (c) 2024 Humana Inc.
+
 HISTORY:
 Date      	          By	Comments
 ----------	          ---	----------------------------------------------------------
@@ -38,10 +38,10 @@ $DCSTemplate = @"
 	<DisplayNameUnresolved>
 	</DisplayNameUnresolved>
 	<SchedulesEnabled>-1</SchedulesEnabled>
-	<LatestOutputLocation>C:\PerfLogs\Admin\Genesys Cloud\WKMJ0G3T9P_20240412-000008</LatestOutputLocation>
-	<Name>GenesysCloud</Name>
-	<OutputLocation>C:\PerfLogs\Admin\Genesys Cloud\WKMJ0G3T9P_20240412-000009</OutputLocation>
-	<RootPath>%systemdrive%\PerfLogs\Admin\Genesys Cloud</RootPath>
+	<LatestOutputLocation>C:\Windows\temp</LatestOutputLocation>
+	<Name>PerfmonExample</Name>
+	<OutputLocation>C:\Windows\temp</OutputLocation>
+	<RootPath>%systemdrive%\Windows\temp</RootPath>
 	<Segment>-1</Segment>
 	<SegmentMaxDuration>3600</SegmentMaxDuration>
 	<SegmentMaxSize>0</SegmentMaxSize>
@@ -72,7 +72,7 @@ $DCSTemplate = @"
 		<LogAppend>0</LogAppend>
 		<LogCircular>0</LogCircular>
 		<LogOverwrite>0</LogOverwrite>
-		<LatestOutputLocation>C:\PerfLogs\Admin\Genesys Cloud\WKMJ0G3T9P_20240412-000008\DataCollector02.etl</LatestOutputLocation>
+		<LatestOutputLocation>C:\Windows\temp\DataCollector02.etl</LatestOutputLocation>
 		<Guid>{00000000-0000-0000-0000-000000000000}</Guid>
 		<BufferSize>8</BufferSize>
 		<BuffersLost>0</BuffersLost>
@@ -102,7 +102,7 @@ $DCSTemplate = @"
 		<LogAppend>0</LogAppend>
 		<LogCircular>0</LogCircular>
 		<LogOverwrite>0</LogOverwrite>
-		<LatestOutputLocation>C:\PerfLogs\Admin\Genesys Cloud\WKMJ0G3T9P_20240412-000008\DataCollector03.xml</LatestOutputLocation>
+		<LatestOutputLocation>C:\Windows\temp\DataCollector03.xml</LatestOutputLocation>
 		<QueryNetworkAdapters>0</QueryNetworkAdapters>
 		<FileMaxCount>0</FileMaxCount>
 		<FileMaxTotalSize>0</FileMaxTotalSize>
@@ -121,7 +121,7 @@ $DCSTemplate = @"
 		<LogAppend>0</LogAppend>
 		<LogCircular>0</LogCircular>
 		<LogOverwrite>0</LogOverwrite>
-		<LatestOutputLocation>C:\PerfLogs\Admin\Genesys Cloud\WKMJ0G3T9P_20240412-000008\DataCollector01.blg</LatestOutputLocation>
+		<LatestOutputLocation>C:\Windows\temp\DataCollector01.blg</LatestOutputLocation>
 		<DataSourceName>
 		</DataSourceName>
 		<SampleInterval>1</SampleInterval>
@@ -209,7 +209,7 @@ $DCSTemplate = @"
 </DataCollectorSet>
 "@
 
-$DCSName = 'GenesysCloud'
+$DCSName = 'PerfMonExample'
 $DCSCheck = logman query $DCSName # Query if DCS already exists
 
 if ($DCSCheck[1] -like "*$($DCSName)") {
